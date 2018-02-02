@@ -1,0 +1,9 @@
+#!/bin/bash
+git clean -fdx
+
+gcc -c -fPIC my-gtkdoc-test.c -o my-gtkdoc-test.o
+gcc my-gtkdoc-test.o -shared -o my-gtkdoc-test.so
+
+gtkdoc-scan --ignore-headers="" --source-dir=. --module=my-gtkdoc-test
+gtkdoc-mkdb --output-format=xml --ignore-files="" --source-dir=. --module=my-gtkdoc-test
+gtkdoc-mkhtml my-gtkdoc-test my.sgml
